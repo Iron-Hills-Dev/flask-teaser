@@ -7,5 +7,4 @@ def month_days_left():
     """
     :return: Amount of days left to end of the month
     """
-    # TODO docs
     return {"days-left": month_service.get_days_left()}
