@@ -1,3 +1,5 @@
+from datetime import date
+
 from app import app
 from domain.date import month_service
 
@@ -7,4 +9,4 @@ def month_days_left():
     """
     :return: Amount of days left to end of the month
     """
-    return {"days-left": month_service.get_days_left()}
+    return {"daysLeft": month_service.get_days_left(date.today())}, 200
