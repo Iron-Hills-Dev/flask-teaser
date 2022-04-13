@@ -9,7 +9,6 @@ from domain.date import month_service
     (date(2022, 4, 12), 18),
     (date(2022, 1, 31), 0),
     (date(2022, 2, 1), 27),
-    (date(2022, 2, 1), 27),
     (date(2020, 2, 1), 28),
     (date(2021, 5, 10), 21),
 
