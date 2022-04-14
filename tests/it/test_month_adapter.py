@@ -1,10 +1,9 @@
-from datetime import date
-
 from app import app
-from domain.date import month_service
 
 
-def test_should_respond_correctly():
+def test_should_respond_correctly(mocker):
+    mocker.patch('domain.date.month_service.get_days_left', return_value=5)
+
     # given
     app.config.update({"TESTING": True})
     _client = app.test_client()
@@ -14,7 +13,7 @@ def test_should_respond_correctly():
 
     # then
     assert _request.status_code == 200
-    assert _request.json == {"daysLeft": month_service.get_days_left(date.today())}
+    assert _request.json == {"daysLeft": 5}
 
 
 def test_bad_accept_header():
