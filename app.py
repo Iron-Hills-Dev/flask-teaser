@@ -1,4 +1,6 @@
 import logging
+
+from infrastructure.config.ports_config import AppPorts
 from infrastructure.logging.logging_formatter import CustomFormatter
 
 from flask import Flask
@@ -17,5 +19,9 @@ logger.addHandler(ch)
 
 logging.info("Activated logging")
 
+# application ports configuration
+ports = AppPorts()
+
 from application import month_adapter
 from application import year_adapter
+from application.car import car_rest_adapter
