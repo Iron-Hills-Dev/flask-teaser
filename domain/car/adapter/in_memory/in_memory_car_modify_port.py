@@ -17,6 +17,6 @@ class InMemoryCarModifyPort(CarModifyPort):
 
     def delete_car(self, _uuid: uuid.UUID) -> bool:
         logging.debug("[remove_car] Triggered function")
-        cars.pop(_uuid)
+        cars.pop(str(_uuid))
         logging.debug(f"[remove_car] Successfully removed car {str(_uuid)}")
         return True

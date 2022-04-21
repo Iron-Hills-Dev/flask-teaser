@@ -10,4 +10,4 @@ class CarResponse:
         self.regNum = _car.registration_number
 
     def to_json(self):
-        return json.dumps(self.__dict__)
+        return self.__dict__
