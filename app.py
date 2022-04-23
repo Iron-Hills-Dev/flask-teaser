@@ -2,7 +2,6 @@ import logging
 
 from flask import Flask
 
-from infrastructure.config.app_config import set_app_config
 from infrastructure.config.ports_config import AppPorts
 from infrastructure.logging.logging_formatter import CustomFormatter
 
@@ -17,15 +16,12 @@ ch.setFormatter(CustomFormatter())
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 logger.addHandler(ch)
-
 logging.info("Activated logging")
 
-# app config set
-set_app_config(app)
-
 # application ports configuration
-ports = AppPorts(app.config["CAR_PORT"])
+ports = AppPorts(app)
+logging.info("Configured app ports")
 
-from application import month_adapter
 from application import year_adapter
+from application import month_adapter
 from application.car import car_rest_adapter

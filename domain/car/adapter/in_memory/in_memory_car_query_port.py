@@ -1,14 +1,14 @@
 import logging
 import uuid
 
-from data.car_dict_in_memory import cars
-from domain.car.CarQueryPort import CarQueryPort
-from domain.car.model.Car import Car
+from domain.car.adapter.in_memory.car_dict import cars
+from domain.car.car_query_port import CarQueryPort
+from domain.car.model.car import Car
 
 
 class InMemoryCarQueryPort(CarQueryPort):
-    def find_car(self, _uuid: uuid.UUID) -> Car:
-        logging.debug("[find_car] Function triggered")
-        _car = cars[str(_uuid)]
-        logging.debug(f"[find_car] Found car {str(_uuid)} in memory")
+    def find_car(self, _car_id: uuid.UUID) -> Car:
+        logging.debug(f"Trying to find car with ID: {_car_id}")
+        _car = cars[str(_car_id)]
+        logging.debug(f"Successfully found chosen car: {_car}")
         return _car

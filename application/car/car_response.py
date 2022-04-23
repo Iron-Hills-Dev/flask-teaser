@@ -1,6 +1,6 @@
 import json
 
-from domain.car.model.Car import Car
+from domain.car.model.car import Car
 
 
 class CarResponse:

@@ -1,6 +1,6 @@
 from domain.car.adapter.in_memory.in_memory_car_modify_port import InMemoryCarModifyPort
 from domain.car.adapter.in_memory.in_memory_car_query_port import InMemoryCarQueryPort
-from domain.car.model.CarAddCommand import CarAddCommand
+from domain.car.model.car_add_command import CarAddCommand
 
 car_modify = InMemoryCarModifyPort()
 car_query = InMemoryCarQueryPort()
