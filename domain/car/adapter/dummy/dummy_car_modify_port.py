@@ -12,6 +12,6 @@ class DummyCarModifyPort(CarModifyPort):
         logging.debug(f'Generated random car_id: {car_id}')
         return car_id
 
-    def delete_car(self, _car_id: uuid.UUID) -> None:
+    def delete_car(self, _car_id: uuid.UUID) -> bool:
         logging.debug(f"Deleting car (it's a fake): car_id={_car_id}")
-        pass
+        return True

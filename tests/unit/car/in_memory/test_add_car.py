@@ -15,6 +15,6 @@ def test_should_save_correctly():
 
     # then
     _car = car_query.find_car(_uuid)
-    assert _car.uuid == _uuid
+    assert _car.id == _uuid
     assert _car.model == "Lamborghini Hurracan"
     assert _car.registration_number == "EPA1234"

@@ -1,5 +1,5 @@
 import logging
-import uuid
+from uuid import UUID
 
 from flask import request
 
@@ -23,15 +23,15 @@ def add_car():
     return CarIdResponse(car_id).to_json(), 200
 
 
-@app.route("/car/<car_id>", methods=["DELETE"])
+@app.route("/car/<_car_id>", methods=["DELETE"])
 def del_car(_car_id: str):
     logging.info(f'Processing delete car request: {request}, id={_car_id}')
-    car_modify_port.delete_car(uuid.UUID(_car_id))
+    car_modify_port.delete_car(UUID(_car_id))
     return '', 204
 
 
-@app.route("/car/<car_id>", methods=["GET"])
+@app.route("/car/<_car_id>", methods=["GET"])
 def find_car(_car_id: str):
     logging.info(f'Processing find car request: {request}, id={_car_id}')
-    car = car_query_port.find_car(uuid.UUID(_car_id))
+    car = car_query_port.find_car(UUID(_car_id))
     return CarResponse(car).to_json(), 200
