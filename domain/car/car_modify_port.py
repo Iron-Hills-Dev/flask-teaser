@@ -2,7 +2,7 @@ import abc
 import uuid
 from abc import ABC
 
-from domain.car.model.CarAddCommand import CarAddCommand
+from domain.car.model.car_add_command import CarAddCommand
 
 
 class CarModifyPort(ABC):
@@ -12,5 +12,5 @@ class CarModifyPort(ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def delete_car(self, _id: uuid) -> None:
+    def delete_car(self, _car_id: uuid) -> None:
         raise NotImplementedError

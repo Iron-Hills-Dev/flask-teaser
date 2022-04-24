@@ -23,3 +23,14 @@ pipenv shell
 pipenv install
 flask run
 ```
+
+Run application
+```
+export CAR_PORT={DUMMY / IN_MEMORY}
+flask run
+```
+
+#### More about CAR_PORT
+Before running an application you need to choose car port - implementation of car service:\
+DUMMY - dummy implementation, no real actions, returns always fake data.\
+IN_MEMORY - saves cars in dictionary in memory - all data will disappear after restart of application.
