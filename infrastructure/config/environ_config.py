@@ -5,7 +5,7 @@ from flask import Config
 
 ENV_PREFIX = "TEASER_"
 
-default_envs = {"TEASER_CAR_DATA_DIR": "/tmp/teaser_car_data"}
+default_envs = {}
 
 
 def import_all_envs(_config: Config):
