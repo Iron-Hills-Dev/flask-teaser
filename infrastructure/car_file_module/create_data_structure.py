@@ -22,10 +22,10 @@ def is_valid_data_folder(_path: str) -> bool:
         return False
 
 
-def car_file_module_init_data_structure(_path: str):
+def init_data_structure(_path: str):
     logging.debug(f"Init data structure for car-file-module in {_path}")
     try:
-        return car_file_module_create_data_structure(_path)
+        return create_data_structure(_path)
     except OSError:
         if is_valid_data_folder(_path):
             logging.warning("Data structure already exists - creating aborted")
@@ -34,7 +34,7 @@ def car_file_module_init_data_structure(_path: str):
             exit(1)
 
 
-def car_file_module_create_data_structure(_path: str) -> bool:
+def create_data_structure(_path: str) -> bool:
     os.makedirs(_path)
     logging.debug(f"Creating new data structure for car-file-module in {_path}")
     with open(path.join(_path, ".car_file_data_structure"), "w") as _f:

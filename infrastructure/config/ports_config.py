@@ -10,7 +10,7 @@ from domain.car.adapter.in_memory.in_memory_car_modify_port import InMemoryCarMo
 from domain.car.adapter.in_memory.in_memory_car_query_port import InMemoryCarQueryPort
 from domain.car.car_modify_port import CarModifyPort
 from domain.car.car_query_port import CarQueryPort
-from infrastructure.car_file_module.create_data_structure import car_file_module_init_data_structure
+from infrastructure.car_file_module.create_data_structure import init_data_structure
 
 
 # This is global application ports configuration
@@ -34,7 +34,7 @@ def config_car_module(_config: Config) -> [CarModifyPort, CarQueryPort]:
             return InMemoryCarModifyPort(), InMemoryCarQueryPort()
         case "FILE":
             logging.info("Configuring FILE car ports")
-            car_file_module_init_data_structure(_config.get("TEASER_CAR_DATA_DIR"))
+            init_data_structure(_config.get("TEASER_CAR_DATA_DIR"))
             return FileCarModifyPort(_config.get('TEASER_CAR_DATA_DIR')), FileCarQueryPort(
                 _config.get('TEASER_CAR_DATA_DIR'))
         case _:
