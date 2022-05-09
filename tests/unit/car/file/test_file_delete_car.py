@@ -2,12 +2,12 @@ import logging
 import uuid
 
 from app import app
-from domain.car.adapter.file.file_car_modify_port import FileCarModifyPort
-from domain.car.adapter.file.file_car_query_port import FileCarQueryPort
+from domain.car.adapter.file.file_car_modify_adapter import FileCarModifyAdapter
+from domain.car.adapter.file.file_car_query_adapter import FileCarQueryAdapter
 from domain.car.model.car_add_command import CarAddCommand
 from tests.decors import using_car_file_env
 
-car_modify, car_query = FileCarModifyPort(app.config["TEASER_CAR_DATA_DIR"]), FileCarQueryPort(
+car_modify, car_query = FileCarModifyAdapter(app.config["TEASER_CAR_DATA_DIR"]), FileCarQueryAdapter(
     app.config["TEASER_CAR_DATA_DIR"])
 
 

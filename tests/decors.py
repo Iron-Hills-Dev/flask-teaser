@@ -2,7 +2,7 @@ import logging
 import shutil
 from functools import wraps
 
-from infrastructure.car_file_module.create_data_structure import init_data_structure
+from infrastructure.data_structure.car_file_structure import init_data_structure
 
 
 def using_car_file_env(_path):
@@ -10,8 +10,8 @@ def using_car_file_env(_path):
         @wraps(f)
         def wrapper(*args, **kwargs):
             shutil.rmtree(_path, ignore_errors=True)
-            logging.debug("Deleted old data structure")
-            logging.debug("Creating new data structure")
+            logging.debug("Deleted old data_structure structure")
+            logging.debug("Creating new data_structure structure")
             init_data_structure(_path)
             f(*args, **kwargs)
 

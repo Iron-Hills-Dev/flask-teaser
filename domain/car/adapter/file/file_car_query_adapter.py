@@ -8,7 +8,7 @@ from domain.car.car_query_port import CarQueryPort
 from domain.car.model.car import Car
 
 
-class FileCarQueryPort(CarQueryPort):
+class FileCarQueryAdapter(CarQueryPort):
     def __init__(self, _data_path: str) -> None:
         self.data_path = _data_path
         super().__init__()

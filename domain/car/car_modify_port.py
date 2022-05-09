@@ -12,5 +12,5 @@ class CarModifyPort(ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def delete_car(self, _car_id: UUID) -> bool:
+    def delete_car(self, _car_id: UUID) -> None:
         raise NotImplementedError

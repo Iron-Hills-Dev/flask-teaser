@@ -9,7 +9,7 @@ from domain.car.model.car import Car
 from domain.car.model.car_add_command import CarAddCommand
 
 
-class FileCarModifyPort(CarModifyPort):
+class FileCarModifyAdapter(CarModifyPort):
     def __init__(self, _data_path: str) -> None:
         self.data_path = _data_path
 
@@ -23,14 +23,13 @@ class FileCarModifyPort(CarModifyPort):
         logging.debug(f"Car successfully added: id: {_car.id}")
         return _car.id
 
-    def delete_car(self, _car_id: UUID) -> bool:
+    def delete_car(self, _car_id: UUID) -> None:
         logging.debug(f"Removing car with id {_car_id}")
         _path = path.join(self.data_path, f"cars/{_car_id}.json")
         if path.exists(_path):
             logging.debug("Car with this id has been found - removing")
             os.remove(_path)
             logging.debug("Removed car successfully")
-            return True
         else:
             logging.error("Car with given ID does not exist")
             raise FileNotFoundError

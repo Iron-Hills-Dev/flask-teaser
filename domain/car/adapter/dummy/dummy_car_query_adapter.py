@@ -5,7 +5,7 @@ from domain.car.car_query_port import CarQueryPort
 from domain.car.model.car import Car
 
 
-class DummyCarQueryPort(CarQueryPort):
+class DummyCarQueryAdapter(CarQueryPort):
 
     def find_car(self, _car_id: uuid.UUID) -> Car:
         fake_car = Car(_car_id, "Porsche Cayenne", "XX 1234")
