@@ -56,3 +56,22 @@ or run with force rebuilding
 ```
 docker-compose up --build
 ```
+
+### Dockerized Postgres
+
+To run postgres and pgadmin services use this command:
+```
+cd .docker
+docker-compose -f docker-compose-services.yml up
+```
+
+Postgres:
+- user: `postgres`
+- pass: `postgres` 
+- access from host: `localhost:5432` 
+- access from container: `teaser-postgres:5432`
+
+Pgadmin:
+- portal: http://localhost:5480
+- user: `codebusters@ironhills.dev`
+- pass: `postgres`
