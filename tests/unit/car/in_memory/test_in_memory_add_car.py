@@ -1,9 +1,8 @@
-from domain.car.adapter.in_memory.in_memory_car_modify_port import InMemoryCarModifyPort
-from domain.car.adapter.in_memory.in_memory_car_query_port import InMemoryCarQueryPort
+from domain.car.adapter.in_memory.in_memory_car_modify_adapter import InMemoryCarModifyAdapter
+from domain.car.adapter.in_memory.in_memory_car_query_adapter import InMemoryCarQueryAdapter
 from domain.car.model.car_add_command import CarAddCommand
 
-car_modify = InMemoryCarModifyPort()
-car_query = InMemoryCarQueryPort()
+car_modify, car_query = InMemoryCarModifyAdapter(), InMemoryCarQueryAdapter()
 
 
 def test_should_save_correctly():
@@ -15,6 +14,6 @@ def test_should_save_correctly():
 
     # then
     _car = car_query.find_car(_uuid)
-    assert _car.uuid == _uuid
+    assert _car.id == _uuid
     assert _car.model == "Lamborghini Hurracan"
     assert _car.registration_number == "EPA1234"

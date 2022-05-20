@@ -1,11 +1,10 @@
 import uuid
 
-from domain.car.adapter.in_memory.in_memory_car_modify_port import InMemoryCarModifyPort
-from domain.car.adapter.in_memory.in_memory_car_query_port import InMemoryCarQueryPort
+from domain.car.adapter.in_memory.in_memory_car_modify_adapter import InMemoryCarModifyAdapter
+from domain.car.adapter.in_memory.in_memory_car_query_adapter import InMemoryCarQueryAdapter
 from domain.car.model.car_add_command import CarAddCommand
 
-car_modify = InMemoryCarModifyPort()
-car_query = InMemoryCarQueryPort()
+car_modify, car_query = InMemoryCarModifyAdapter(), InMemoryCarQueryAdapter()
 
 
 def test_should_delete():

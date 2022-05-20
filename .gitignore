@@ -18,6 +18,7 @@ _mailinglist
 docs/_build/
 .vscode
 Pipfile.lock
+data
 
 # Coverage reports
 htmlcov/
