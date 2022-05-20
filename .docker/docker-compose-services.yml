@@ -1,0 +1,22 @@
+version: "3.4"
+services:
+
+  teaser-postgres:
+    image: postgres:14.2
+    container_name: teaser-postgres
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+    volumes:
+      - ../storage/postgresql/data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  teaser-pgadmin:
+    image: dpage/pgadmin4:6.9
+    container_name: teaser-pgadmin
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=codebusters@ironhills.dev
+      - PGADMIN_DEFAULT_PASSWORD=postgres
+    ports:
+      - "5480:80"
