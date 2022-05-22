@@ -10,7 +10,7 @@ from domain.car.model.car_add_command import CarAddCommand
 class InMemoryCarModifyAdapter(CarModifyPort):
     def add_car(self, _cmd: CarAddCommand) -> uuid.UUID:
         logging.debug(f"Adding car: {_cmd}")
-        _car = Car(car_id=uuid.uuid1(), model=_cmd.model, registration_number=_cmd.registration_number)
+        _car = Car(car_id=uuid.uuid4(), model=_cmd.model, registration_number=_cmd.registration_number)
         cars.setdefault(str(_car.id), _car)
         logging.debug(f"Saved car using ID: {str(_car.id)}")
         return _car.id

@@ -2,7 +2,7 @@ import json
 import logging
 import os
 from os import path
-from uuid import UUID, uuid1
+from uuid import UUID, uuid4
 
 from domain.car.car_modify_port import CarModifyPort
 from domain.car.model.car import Car
@@ -15,7 +15,7 @@ class FileCarModifyAdapter(CarModifyPort):
 
     def add_car(self, _cmd: CarAddCommand) -> UUID:
         logging.debug(f"Adding car: {_cmd}")
-        _car = Car(car_id=uuid1(), model=_cmd.model, registration_number=_cmd.registration_number)
+        _car = Car(car_id=uuid4(), model=_cmd.model, registration_number=_cmd.registration_number)
         _json = _car.to_dict()
         _json["id"] = str(_json["id"])
         with open(path.join(self.data_path, f"cars/{_car.id}.json"), "w") as _f:
