@@ -1,5 +1,4 @@
 class Car:
-
     def __init__(self, car_id, model, registration_number) -> None:
         self.id = car_id
         self.model = model

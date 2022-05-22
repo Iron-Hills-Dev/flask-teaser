@@ -22,7 +22,7 @@ class FileCarQueryAdapter(CarQueryPort):
             with open(_path, "r") as _f:
                 _str_json = str(_f.read())
             _car = json.loads(_str_json, object_hook=lambda car: SimpleNamespace(**car))
-            _car = Car(_car.id, _car.model, _car.registration_number)
+            _car = Car(_car.car_id, _car.model, _car.registration_number)
             logging.debug(f"Successfully read car: {_car.to_dict()}")
             return _car
         else:
