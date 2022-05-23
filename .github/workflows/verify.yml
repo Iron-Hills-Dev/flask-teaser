@@ -24,4 +24,5 @@ jobs:
 
       - name: Run test suites
         run: |
-          pipenv run python3.10 -m pytest
+          pipenv run python3.10 -m pytest tests/it
+          pipenv run python3.10 -m pytest tests/unit

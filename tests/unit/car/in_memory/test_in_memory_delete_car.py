@@ -1,5 +1,7 @@
 import uuid
 
+import pytest
+
 from domain.car.adapter.in_memory.in_memory_car_modify_adapter import InMemoryCarModifyAdapter
 from domain.car.adapter.in_memory.in_memory_car_query_adapter import InMemoryCarQueryAdapter
 from domain.car.model.car_add_command import CarAddCommand
@@ -13,13 +15,12 @@ def test_should_delete():
     _uuid = car_modify.add_car(_cmd)
 
     # when
-    try:
+    with pytest.raises(KeyError) as _exc:
         car_modify.delete_car(_uuid)
         car_query.find_car(_uuid)
 
     # then
-    except KeyError as _exc:
-        assert _exc.args[0] == str(_uuid)
+        assert _exc.value.args[0] == str(_uuid)
 
 
 def test_should_not_delete_fake_car():
@@ -27,9 +28,8 @@ def test_should_not_delete_fake_car():
     _fake_uuid = uuid.uuid1()
 
     # when
-    try:
+    with pytest.raises(KeyError) as _exc:
         car_modify.delete_car(_fake_uuid)
 
     # then
-    except KeyError as _exc:
-        assert _exc.args[0] == str(_fake_uuid)
+        assert _exc.value.args[0] == str(_fake_uuid)
