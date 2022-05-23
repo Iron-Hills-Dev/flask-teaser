@@ -3,6 +3,7 @@ import logging
 from flask import Config
 from sqlalchemy import create_engine
 from sqlalchemy.engine import Engine
+from sqlalchemy.exc import OperationalError
 from sqlalchemy_utils import database_exists, create_database
 
 from infrastructure.postgres.model.car_entity import CarEntity
@@ -20,10 +21,17 @@ def get_db_engine(_db_system: str, _config: Config) -> Engine:
 
 
 def init_car_database(_config: Config) -> Engine:
-    logging.debug("Initializing database")
-    logging.debug("Initializing database engine")
-    engine = get_db_engine("postgres", _config)
-    logging.debug("Creating/updating database structure")
-    car_table = CarEntity()
-    car_table.create(engine)
-    return engine
+    try:
+        logging.debug("Initializing database")
+        logging.debug("Initializing database engine")
+        engine = get_db_engine("postgresql", _config)
+        logging.debug("Creating/updating database structure")
+        car_table = CarEntity()
+        car_table.create(engine)
+        return engine
+    except OperationalError:
+        logging.critical("ABORTING INIT - wrong credentials to database")
+        exit(1)
+    except KeyError as _exc:
+        logging.critical(f"ABORTING INIT - missing {_exc.args[0]} environment variable")
+        exit(1)
