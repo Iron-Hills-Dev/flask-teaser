@@ -1,12 +1,36 @@
 version: "3.4"
 services:
-
   flask-teaser:
     build:
       dockerfile: .docker/Dockerfile
       context: ../
     environment:
-      - FLASK_APP=app.py
-      - TEASER_CAR_PORT=IN_MEMORY
+      - FLASK_APP=app
+      - TEASER_CAR_PORT=DATABASE
+      - TEASER_DB_USER=postgres
+      - TEASER_DB_PASS=postgres
+      - TEASER_DB_NAME=teaser
+      - TEASER_DB_HOST=teaser-postgres
+      - TEASER_DB_PORT=5432
     ports:
       - "5000:5000"
+    depends_on:
+      - teaser-postgres
+
+  teaser-postgres:
+    image: postgres:14.2
+    container_name: teaser-postgres
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+
+  teaser-pgadmin:
+    image: dpage/pgadmin4:6.9
+    container_name: teaser-pgadmin
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=codebusters@ironhills.dev
+      - PGADMIN_DEFAULT_PASSWORD=postgres
+    ports:
+      - "5050:80"
+    depends_on:
+      - teaser-postgres
