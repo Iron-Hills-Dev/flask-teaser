@@ -20,14 +20,13 @@ def get_db_engine(_db_system: str, _config: Config) -> Engine:
     return engine
 
 
-def init_car_database(_config: Config) -> Engine:
+def init_database(_config: Config) -> Engine:
     try:
         logging.debug("Initializing database")
-        logging.debug("Initializing database engine")
         engine = get_db_engine("postgresql", _config)
-        logging.debug("Creating/updating database structure")
-        car_table = CarEntity()
-        car_table.create(engine)
+        logging.debug("Creating database structure")
+        create_car_db_structure(engine)
+        logging.debug("Created database structure")
         return engine
     except OperationalError:
         logging.critical("ABORTING INIT - wrong credentials to database")
@@ -35,3 +34,9 @@ def init_car_database(_config: Config) -> Engine:
     except KeyError as _exc:
         logging.critical(f"ABORTING INIT - missing {_exc.args[0]} environment variable")
         exit(1)
+
+
+def create_car_db_structure(engine):
+    logging.debug("Creating car table")
+    car_table = CarEntity()
+    car_table.create(engine)

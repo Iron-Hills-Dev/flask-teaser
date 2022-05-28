@@ -12,7 +12,7 @@ from domain.car.adapter.in_memory.in_memory_car_modify_adapter import InMemoryCa
 from domain.car.adapter.in_memory.in_memory_car_query_adapter import InMemoryCarQueryAdapter
 from domain.car.car_modify_port import CarModifyPort
 from domain.car.car_query_port import CarQueryPort
-from infrastructure.postgres.car_database_structure import init_car_database
+from infrastructure.postgres.car_database_structure import init_database
 from infrastructure.data_structure.car_file_structure import init_data_structure
 
 
@@ -42,7 +42,7 @@ def config_car_module(_config: Config) -> [CarModifyPort, CarQueryPort]:
                 _config.get('TEASER_CAR_DATA_DIR'))
         case "DATABASE":
             logging.info("Configuring DATABASE car ports")
-            engine = init_car_database(_config)
+            engine = init_database(_config)
             logging.info("Initializing global car database engine")
             return DatabaseCarModifyAdapter(engine), DatabaseCarQueryAdapter(engine)
         case _:

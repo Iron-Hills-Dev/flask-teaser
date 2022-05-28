@@ -1,11 +1,13 @@
-import contextlib
+import logging
 import logging
 import shutil
 from functools import wraps
 
 from sqlalchemy import MetaData
+from sqlalchemy.orm import Session
 
 from infrastructure.data_structure.car_file_structure import init_data_structure
+from infrastructure.postgres.car_database_structure import create_car_db_structure
 from infrastructure.postgres.model.car_entity import CarEntity
 
 
@@ -24,23 +26,19 @@ def using_car_file_env(_path):
     return decorator
 
 
-def using_car_database(f):
+def using_database(f):
     @wraps(f)
     def wrapper(*args, **kwargs):
         logging.debug("Creating database structure")
         engine = kwargs["db_engine"]
-        cars_table = CarEntity()
-        cars_table.create(engine)
+        create_car_db_structure(engine)
         logging.debug("Created database structure: starting test")
+
         f(*args, **kwargs)
+
         logging.debug("Clearing database")
-        meta = MetaData()
-        with contextlib.closing(engine.connect()) as con:
-            trans = con.begin()
-            for table in reversed(meta.sorted_tables):
-                logging.debug(f"Deleting table: {table}")
-                con.execute(table.delete())
-            trans.commit()
+        with Session(engine) as session:
+            session.query(CarEntity).delete()
+            session.commit()
 
     return wrapper
-

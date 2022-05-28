@@ -19,7 +19,5 @@ def db_engine() -> Engine:
     postgres = PostgresContainer("postgres:14.2")
     postgres.start()
     url = postgres.get_connection_url()
-    if not database_exists(url):
-        create_database(url)
     db_engine = create_engine(url)
     return db_engine

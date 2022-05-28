@@ -32,5 +32,3 @@ services:
       - PGADMIN_DEFAULT_PASSWORD=postgres
     ports:
       - "5050:80"
-    depends_on:
-      - teaser-postgres
