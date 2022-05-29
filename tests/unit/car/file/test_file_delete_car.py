@@ -1,5 +1,6 @@
-import logging
 import uuid
+
+import pytest
 
 from app import app
 from domain.car.adapter.file.file_car_modify_adapter import FileCarModifyAdapter
@@ -18,12 +19,11 @@ def test_should_delete():
     _uuid = car_modify.add_car(_cmd)
 
     # when
-    try:
+    with pytest.raises(FileNotFoundError) as _exc:
         car_modify.delete_car(_uuid)
         car_query.find_car(_uuid)
 
-    # then
-    except FileNotFoundError as _exc:
+        # then
         assert 1 == 1
 
 
@@ -33,9 +33,8 @@ def test_should_not_delete_fake_car():
     _fake_uuid = uuid.uuid1()
 
     # when
-    try:
+    with pytest.raises(FileNotFoundError) as _exc:
         car_modify.delete_car(_fake_uuid)
 
-    # then
-    except FileNotFoundError as _exc:
+        # then
         assert 1 == 1

@@ -26,6 +26,6 @@ import_all_envs(app.config)
 ports = AppPorts(app.config)
 logging.info("Configured app ports")
 
-from application import year_adapter
 from application import month_adapter
+from application import year_adapter
 from application.car import car_rest_adapter
