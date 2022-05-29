@@ -1,4 +1,3 @@
-import logging
 import uuid
 
 import pytest
@@ -24,7 +23,7 @@ def test_should_delete():
         car_modify.delete_car(_uuid)
         car_query.find_car(_uuid)
 
-    # then
+        # then
         assert 1 == 1
 
 
@@ -37,5 +36,5 @@ def test_should_not_delete_fake_car():
     with pytest.raises(FileNotFoundError) as _exc:
         car_modify.delete_car(_fake_uuid)
 
-    # then
+        # then
         assert 1 == 1

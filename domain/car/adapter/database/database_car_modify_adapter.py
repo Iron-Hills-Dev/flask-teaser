@@ -3,7 +3,6 @@ from uuid import UUID, uuid4
 
 from sqlalchemy.orm import sessionmaker
 
-from domain.car.adapter.database.database_car_query_adapter import DatabaseCarQueryAdapter
 from domain.car.car_modify_port import CarModifyPort
 from domain.car.model.car import Car
 from domain.car.model.car_add_command import CarAddCommand

@@ -8,7 +8,7 @@ _base_ = declarative_base()
 
 
 class CarEntity(_base_):
-    __tablename__ = "cars"
+    __tablename__ = "car"
     car_id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4())
     model = Column(String(150))
     registration_number = Column(String(15))

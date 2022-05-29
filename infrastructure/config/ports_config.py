@@ -12,7 +12,7 @@ from domain.car.adapter.in_memory.in_memory_car_modify_adapter import InMemoryCa
 from domain.car.adapter.in_memory.in_memory_car_query_adapter import InMemoryCarQueryAdapter
 from domain.car.car_modify_port import CarModifyPort
 from domain.car.car_query_port import CarQueryPort
-from infrastructure.postgres.car_database_structure import init_database
+from infrastructure.postgres.database_structure import init_database
 from infrastructure.data_structure.car_file_structure import init_data_structure
 
 

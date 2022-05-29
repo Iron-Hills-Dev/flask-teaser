@@ -1,14 +1,9 @@
-import logging
-import uuid
-
-
 def test_add_car(client):
     # when
     _req = client.post("/car", json={"model": "Lamborghini Hurracan", "regNum": "EPA1234"},
                        headers={"Accept": "application/json", "Content-Type": "application/json"})
 
     # then
-    logging.error(_req.data)
     assert _req.status_code == 200
     assert isinstance(_req.json["id"], str)
 

@@ -1,13 +1,11 @@
 import logging
-import logging
 import shutil
 from functools import wraps
 
-from sqlalchemy import MetaData
+from infrastructure.postgres.database_structure import create_car_db_structure
 from sqlalchemy.orm import Session
 
 from infrastructure.data_structure.car_file_structure import init_data_structure
-from infrastructure.postgres.car_database_structure import create_car_db_structure
 from infrastructure.postgres.model.car_entity import CarEntity
 
 
