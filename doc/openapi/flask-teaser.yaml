@@ -10,39 +10,89 @@ paths:
   /car/{id}:
     get:
       summary: Returns a specific car details.
-      description: This endpoint returns the details of a car by given UUID.
+      description: This endpoint returns the details of a car by given id.
       responses:
         '200':
           description: A JSON object with CAR details.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Car'
+                $ref: '#/components/schemas/CarResponse'
+      tags:
+        - Car
+    delete:
+      summary: Deletes specific car
+      description: This endpoint deletes specific car by given id.
+      responses:
+        '204':
+          description: A confirmation that car has been deleted, no content.
+      tags:
+        - Car
     parameters:
       - name: id
         in: path
-        description: ID of the CAR object (UUID)
+        description: ID of the CAR object (UUID).
         example: 8e358626-0936-47f5-be0e-b488a4871e85
         required: true
         schema:
           type: string
         style: simple
+  /car:
+    post:
+      summary: Adds new car.
+      description: This endpoint adds new car data.
+      requestBody:
+        description: Car data which will be added to base.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CarAddRequest'
+      responses:
+        '200':
+          description: New car id.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CarIdResponse'
+      tags:
+        - Car
 
 components:
   schemas:
-    Car:
+    CarResponse:
       type: object
       properties:
         id:
           type: string
-          description: unique entity identifier
+          description: Unique entity identifier.
         model:
           type: string
-          description: A car model
+          description: A car model.
         regNum:
           type: string
-          description: A registration number
+          description: A registration number.
       example:
         id: 8e358626-0936-47f5-be0e-b488a4871e85
         model: Porsche 911
         regNum: PO 665CA
+    CarAddRequest:
+      type: object
+      properties:
+        model:
+          type: string
+          description: New car's model.
+        regNum:
+          type: string
+          description: New car's registration number.
+      example:
+        model: Ford Mustang
+        regNum: EL 13GVY
+    CarIdResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Car's id (UUID).
+      example:
+        id: 8e358626-0936-47f5-be0e-b488a4871e85
