@@ -4,6 +4,7 @@ services:
     build:
       dockerfile: .docker/Dockerfile
       context: ../
+    container_name: flask-teaser
     environment:
       - FLASK_APP=app
       - TEASER_CAR_PORT=DATABASE
@@ -32,3 +33,22 @@ services:
       - PGADMIN_DEFAULT_PASSWORD=postgres
     ports:
       - "5050:80"
+
+  teaser-openapi:
+    image: swaggerapi/swagger-ui
+    container_name: teaser-openapi
+    volumes:
+        - ../doc/openapi:/usr/share/nginx/html/doc
+    environment:
+      API_URL: doc/flask-teaser.yaml
+
+  nginx:
+    build:
+      dockerfile: Dockerfile
+      context: ./nginx/
+    container_name: teaser-nginx
+    ports:
+      - "5080:80"
+    depends_on:
+      - flask-teaser
+      - teaser-openapi

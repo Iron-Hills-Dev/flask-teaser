@@ -1,0 +1,48 @@
+openapi: 3.0.3
+info:
+  title: Flask Teaser
+  description: The Flask Teaser API Documentation
+  version: '1.0'
+servers:
+  - url: http://localhost:5080/api
+    description: local development environment
+paths:
+  /car/{id}:
+    get:
+      summary: Returns a specific car details.
+      description: This endpoint returns the details of a car by given UUID.
+      responses:
+        '200':
+          description: A JSON object with CAR details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Car'
+    parameters:
+      - name: id
+        in: path
+        description: ID of the CAR object (UUID)
+        example: 8e358626-0936-47f5-be0e-b488a4871e85
+        required: true
+        schema:
+          type: string
+        style: simple
+
+components:
+  schemas:
+    Car:
+      type: object
+      properties:
+        id:
+          type: string
+          description: unique entity identifier
+        model:
+          type: string
+          description: A car model
+        regNum:
+          type: string
+          description: A registration number
+      example:
+        id: 8e358626-0936-47f5-be0e-b488a4871e85
+        model: Porsche 911
+        regNum: PO 665CA
