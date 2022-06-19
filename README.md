@@ -76,6 +76,9 @@ or run with force rebuilding
 docker-compose up --build
 ```
 
+### Run Open API documentation
+Docker Compose has definition of OpenAPI service. You can reach it on address `http://localhost:5080`.  
+
 ### Dockerized Postgres
 
 To run postgres and pgadmin services use this command:
